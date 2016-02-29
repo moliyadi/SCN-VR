@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0125CEB81C829EFD00A0C6FE /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 0125CEB71C829EFD00A0C6FE /* art.scnassets */; };
 		AC6BEBDD1AD234C00073BE68 /* BasicGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6BEBDC1AD234C00073BE68 /* BasicGameViewController.m */; };
 		AC7ECEBC1AD1AE9E00F2A232 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AC7ECEBB1AD1AE9E00F2A232 /* main.m */; };
 		AC7ECEBF1AD1AE9E00F2A232 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AC7ECEBE1AD1AE9E00F2A232 /* AppDelegate.m */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0125CEB71C829EFD00A0C6FE /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		AC6BEBDB1AD234C00073BE68 /* BasicGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicGameViewController.h; sourceTree = "<group>"; };
 		AC6BEBDC1AD234C00073BE68 /* BasicGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicGameViewController.m; sourceTree = "<group>"; };
 		AC7ECEB61AD1AE9E00F2A232 /* HelloWorld.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloWorld.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -159,6 +161,7 @@
 		AC7ECEB81AD1AE9E00F2A232 /* HelloWorld */ = {
 			isa = PBXGroup;
 			children = (
+				0125CEB71C829EFD00A0C6FE /* art.scnassets */,
 				AC7ECF001AD1B79C00F2A232 /* Utils */,
 				AC7ECEFF1AD1B79200F2A232 /* Game */,
 				AC7ECEFE1AD1B78D00F2A232 /* Home */,
@@ -297,7 +300,6 @@
 				TargetAttributes = {
 					AC7ECEB51AD1AE9E00F2A232 = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = 53N68F829D;
 					};
 					AC7ECECE1AD1AE9E00F2A232 = {
 						CreatedOnToolsVersion = 6.2;
@@ -332,6 +334,7 @@
 				AC7ECEC51AD1AE9E00F2A232 /* Main.storyboard in Resources */,
 				ACF5039B1C6709970034F6FB /* SCN-VRProfile.strings in Resources */,
 				ACF5039C1C6709970034F6FB /* SCN-VRStrings.strings in Resources */,
+				0125CEB81C829EFD00A0C6FE /* art.scnassets in Resources */,
 				ACF5039A1C6709970034F6FB /* SCN-VRDevices.strings in Resources */,
 				AC7ECECA1AD1AE9E00F2A232 /* LaunchScreen.xib in Resources */,
 				AC7ECEC71AD1AE9E00F2A232 /* Images.xcassets in Resources */,
