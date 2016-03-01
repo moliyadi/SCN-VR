@@ -88,7 +88,7 @@
     
     SCNScene *scene = [SCNScene scene];
     
-    SCNGeometry *boxGeometry = [SCNBox boxWithWidth:10.0 height:20.0 length:20.0 chamferRadius:0.8];
+    SCNGeometry *boxGeometry = [SCNBox boxWithWidth:10.0 height:20.0 length:30.0 chamferRadius:0.5];
     SCNNode *boxNode = [SCNNode nodeWithGeometry:boxGeometry];
     boxNode.position = SCNVector3Make(-20, 20, 0);
     boxNode.categoryBitMask = 3;
@@ -135,13 +135,17 @@
                        yellowMaterial, purpleMaterial, magentaMaterial];
     //*/
     
-    GLKQuaternion textOrientation = GLKQuaternionMakeWithAngleAndAxis(-1.57079633f, 1, 0, 0);
-    boxNode.orientation = SCNVector4Make(textOrientation.x, textOrientation.y, textOrientation.z, textOrientation.w);
+    //GLKQuaternion textOrientation = GLKQuaternionMakeWithAngleAndAxis(-1.57079633f, 1, 0, 0);
+    GLKQuaternion textOrientation = GLKQuaternionMakeWithAngleAndAxis(-M_PI_2, 1, 0, 0);
+    boxNode.orientation = SCNVector4Make(textOrientation.x, textOrientation.y, textOrientation.z, textOrientation.w); //x轴逆时针90度
+    
+    GLKQuaternion textOrientation1 = GLKQuaternionMakeWithAngleAndAxis(-M_PI_4, 0, 0, 1);
+    boxNode.orientation = SCNVector4Make(textOrientation1.x, textOrientation1.y, textOrientation1.z, textOrientation1.w); //现在屏幕基本在视线正前，但方向还是侧翻了90度，需要调整
     
 //    NSURL *fileURL = [NSURL fileURLWithPath: [[NSBundle mainBundle] pathForResource:@"loop" ofType:@"mov"]];
-    //NSURL *url = [NSURL URLWithString:@"http://192.166.62.66:8060/live/MultiAudioTrak_800.m3u8?offset=14400&duration=14400&token=undefined&userid=&platform=5&channelid=11&deviceid=5AAAADAD6&location=100085&clientsessionid=42201"];
+    NSURL *url = [NSURL URLWithString:@"http://192.166.62.66:8060/live/MultiAudioTrak_800.m3u8?offset=14400&duration=14400&token=undefined&userid=&platform=5&channelid=11&deviceid=5AAAADAD6&location=100085&clientsessionid=42201"];
     //NSURL *url = [NSURL URLWithString:@"https://devimages.apple.com.edgekey.net/streaming/examples/bipbop_16x9/bipbop_16x9_variant.m3u8"];
-    NSURL *url = [NSURL URLWithString:@"http://192.166.66.99:8061/live/yeyan_3750.m3u8?"];
+    //NSURL *url = [NSURL URLWithString:@"http://192.166.66.99:8061/live/yeyan_3750.m3u8?"];
     AVPlayer *player = [AVPlayer playerWithURL: url];
     
     [player play];
@@ -155,6 +159,7 @@
     SKVideoNode *videoNode = [SKVideoNode videoNodeWithAVPlayer:player];
     videoNode.size = size;
     videoNode.position = CGPointMake(size.width * 0.5, size.height * 0.5);
+    videoNode.xScale = videoNode.xScale * -1; //图像翻转
     
     SKScene *videoScene = [SKScene sceneWithSize:size];
     [videoScene addChild:videoNode];
