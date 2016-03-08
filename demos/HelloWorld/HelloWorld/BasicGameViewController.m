@@ -88,9 +88,11 @@
     
     SCNScene *scene = [SCNScene scene];
     
+    //
     SCNGeometry *boxGeometry = [SCNBox boxWithWidth:30.0 height:20.0 length:20.0 chamferRadius:0];
     SCNNode *boxNode = [SCNNode nodeWithGeometry:boxGeometry];
-    boxNode.position = SCNVector3Make(0, 30, 0);
+    //boxNode.position = SCNVector3Make(0, 30, 0); //超宽荧幕
+    boxNode.position = SCNVector3Make(0, 32, 0); //正常荧幕
     boxNode.categoryBitMask = 3;
     [scene.rootNode addChildNode:boxNode];
     
@@ -143,8 +145,8 @@
     //*/
     
     //GLKQuaternion textOrientation = GLKQuaternionMakeWithAngleAndAxis(-1.57079633f, 1, 0, 0);
-    GLKQuaternion textOrientation = GLKQuaternionMakeWithAngleAndAxis(-M_PI, 0, 1, 0);
-    boxNode.orientation = SCNVector4Make(textOrientation.x, textOrientation.y, textOrientation.z, textOrientation.w); //x轴逆时针90度
+    GLKQuaternion boxOrientation = GLKQuaternionMakeWithAngleAndAxis(-M_PI, 0, 1, 0);
+    boxNode.orientation = SCNVector4Make(boxOrientation.x, boxOrientation.y, boxOrientation.z, boxOrientation.w); //x轴逆时针90度
 //
 //    GLKQuaternion textOrientation1 = GLKQuaternionMakeWithAngleAndAxis(-M_PI_4, 0, 0, 1);
 //    GLKQuaternion mult = GLKQuaternionAdd(textOrientation, textOrientation1);
@@ -179,7 +181,25 @@
     [videoNode play];
 
     //[boxNode runAction:[SCNAction repeatActionForever:[SCNAction rotateByX:0 y:2 z:0 duration:1]]];
-
+#if 0 //显示Sumavision
+    //
+    SCNNode * world = [SCNNode node];
+    
+    [scene.rootNode addChildNode:world];
+    
+    SCNText * text = [SCNText textWithString:@"SumaVision" extrusionDepth:1];
+    SCNNode * textNode = [SCNNode nodeWithGeometry:text];
+    
+    textNode.position = SCNVector3Make(boxNode.position.x - 35, boxNode.position.y + 25, boxNode.position.z + 40);
+    textNode.categoryBitMask = 3;
+    text.alignmentMode = kCAAlignmentCenter;
+    text.firstMaterial.diffuse.contents = [UIColor redColor];
+    
+    GLKQuaternion textOrientation = GLKQuaternionMakeWithAngleAndAxis(1.57079633f, 1, 0, 0);
+    textNode.orientation = SCNVector4Make(textOrientation.x, textOrientation.y, textOrientation.z, textOrientation.w);
+    
+    [world addChildNode:textNode];
+#endif
 #endif
     return scene;
 }
