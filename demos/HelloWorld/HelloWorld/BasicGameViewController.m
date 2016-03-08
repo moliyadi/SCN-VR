@@ -88,9 +88,9 @@
     
     SCNScene *scene = [SCNScene scene];
     
-    SCNGeometry *boxGeometry = [SCNBox boxWithWidth:10.0 height:20.0 length:30.0 chamferRadius:0.5];
+    SCNGeometry *boxGeometry = [SCNBox boxWithWidth:30.0 height:20.0 length:20.0 chamferRadius:0];
     SCNNode *boxNode = [SCNNode nodeWithGeometry:boxGeometry];
-    boxNode.position = SCNVector3Make(-20, 20, 0);
+    boxNode.position = SCNVector3Make(0, 30, 0);
     boxNode.categoryBitMask = 3;
     [scene.rootNode addChildNode:boxNode];
     
@@ -105,6 +105,13 @@
     lightNode1.light.type = SCNLightTypeOmni;
     lightNode1.position = SCNVector3Make(0, 0, -50);
     [scene.rootNode addChildNode:lightNode1];
+    
+    // create and add an ambient light to the scene
+    SCNNode *ambientLightNode = [SCNNode node];
+    ambientLightNode.light = [SCNLight light];
+    ambientLightNode.light.type = SCNLightTypeAmbient;
+    ambientLightNode.light.color = [UIColor darkGrayColor];
+    [scene.rootNode addChildNode:ambientLightNode];
     
     SCNMaterial *greenMaterial              = [SCNMaterial material];
     greenMaterial.diffuse.contents          = [UIColor greenColor];
@@ -136,11 +143,12 @@
     //*/
     
     //GLKQuaternion textOrientation = GLKQuaternionMakeWithAngleAndAxis(-1.57079633f, 1, 0, 0);
-    GLKQuaternion textOrientation = GLKQuaternionMakeWithAngleAndAxis(-M_PI_2, 1, 0, 0);
+    GLKQuaternion textOrientation = GLKQuaternionMakeWithAngleAndAxis(-M_PI, 0, 1, 0);
     boxNode.orientation = SCNVector4Make(textOrientation.x, textOrientation.y, textOrientation.z, textOrientation.w); //x轴逆时针90度
-    
-    GLKQuaternion textOrientation1 = GLKQuaternionMakeWithAngleAndAxis(-M_PI_4, 0, 0, 1);
-    boxNode.orientation = SCNVector4Make(textOrientation1.x, textOrientation1.y, textOrientation1.z, textOrientation1.w); //现在屏幕基本在视线正前，但方向还是侧翻了90度，需要调整
+//
+//    GLKQuaternion textOrientation1 = GLKQuaternionMakeWithAngleAndAxis(-M_PI_4, 0, 0, 1);
+//    GLKQuaternion mult = GLKQuaternionAdd(textOrientation, textOrientation1);
+//    boxNode.orientation = SCNVector4Make(mult.x, mult.y, mult.z, mult.w); //现在屏幕基本在视线正前，但方向还是侧翻了90度，需要调整
     
 //    NSURL *fileURL = [NSURL fileURLWithPath: [[NSBundle mainBundle] pathForResource:@"loop" ofType:@"mov"]];
     NSURL *url = [NSURL URLWithString:@"http://192.166.62.66:8060/live/MultiAudioTrak_800.m3u8?offset=14400&duration=14400&token=undefined&userid=&platform=5&channelid=11&deviceid=5AAAADAD6&location=100085&clientsessionid=42201"];
@@ -165,12 +173,13 @@
     [videoScene addChild:videoNode];
     
     //SCNNode *videoWrapperNode = [SCNNode nodeWithGeometry:[SCNSphere sphereWithRadius:10]];
-    SCNMaterial *material = boxGeometry.materials[1];
+    SCNMaterial *material = boxGeometry.materials[5];
     material.diffuse.contents = videoScene;
     
     [videoNode play];
 
     //[boxNode runAction:[SCNAction repeatActionForever:[SCNAction rotateByX:0 y:2 z:0 duration:1]]];
+
 #endif
     return scene;
 }
@@ -203,7 +212,7 @@
     if ([touches count] >= 3) {
         _requestExit = YES;
     }
-    
+    /*
     CGPoint point = [[touches anyObject] locationInView:[self view]];
     
     float adjustedX = point.x * self.nativeScale;
@@ -248,6 +257,7 @@
     if (resetView) {
         [self.profile.tracker calibrate];
     }
+     //*/
 }
 
 @end
